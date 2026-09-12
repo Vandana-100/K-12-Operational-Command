@@ -26,8 +26,8 @@ export default function AnomalyRiskExplanations() {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [anomRes, compRes] = await Promise.all([
-        axios.get("http://localhost:4000/api/anomalies", { headers }),
-        axios.get("http://localhost:4000/api/anomalies/comparison", { headers })
+        axios.get("https://k-12-operational-command.onrender.com/api/anomalies", { headers }),
+        axios.get("https://k-12-operational-command.onrender.com/api/anomalies/comparison", { headers })
       ]);
 
       setAnomalies(anomRes.data.anomalies || []);
@@ -47,7 +47,7 @@ export default function AnomalyRiskExplanations() {
     setScanning(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:4000/api/anomalies/detect", {}, {
+      await axios.post("https://k-12-operational-command.onrender.com/api/anomalies/detect", {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       await loadData();
@@ -75,7 +75,7 @@ export default function AnomalyRiskExplanations() {
     setSubmittingReview(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:4000/api/anomalies/${selectedAnomaly.id}/acknowledge`, {
+      await axios.put(`https://k-12-operational-command.onrender.com/api/anomalies/${selectedAnomaly.id}/acknowledge`, {
         notes: `${reviewDecision}: ${reviewReason}`
       }, {
         headers: { Authorization: `Bearer ${token}` }
