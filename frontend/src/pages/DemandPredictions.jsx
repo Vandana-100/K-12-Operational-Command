@@ -23,7 +23,7 @@ export default function DemandPredictions() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:4000/api/predictions", {
+      const res = await axios.get("https://k-12-operational-command.onrender.com/api/predictions", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPredictions(res.data.predictions || []);
@@ -42,7 +42,7 @@ export default function DemandPredictions() {
     setRefreshing(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:4000/api/predictions/refresh", {}, {
+      await axios.post("https://k-12-operational-command.onrender.com/api/predictions/refresh", {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       await loadPredictions();
@@ -70,7 +70,7 @@ export default function DemandPredictions() {
     setSubmittingDecision(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post("http://localhost:4000/api/predictions/decision", {
+      const res = await axios.post("https://k-12-operational-command.onrender.com/api/predictions/decision", {
         predictionId: selectedPrediction.id,
         decision: decisionType,
         reason: decisionReason,
