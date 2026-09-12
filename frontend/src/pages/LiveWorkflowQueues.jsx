@@ -46,7 +46,7 @@ export default function LiveWorkflowQueues() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let url = `http://localhost:4000/api/workflows?domain=${selectedDomain}&priority=${selectedPriority}&sla_risk=${selectedSla}&status=${selectedStatus}`;
+      let url = `https://k-12-operational-command.onrender.com/api/workflows?domain=${selectedDomain}&priority=${selectedPriority}&sla_risk=${selectedSla}&status=${selectedStatus}`;
       if (searchQuery) url += `&search=${encodeURIComponent(searchQuery)}`;
 
       const res = await axios.get(url, {
@@ -71,7 +71,7 @@ export default function LiveWorkflowQueues() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`http://localhost:4000/api/workflows/${item.id}`, {
+      const res = await axios.get(`https://k-12-operational-command.onrender.com/api/workflows/${item.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setItemHistory(res.data.history || []);
@@ -83,7 +83,7 @@ export default function LiveWorkflowQueues() {
     setUpdating(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.put(`http://localhost:4000/api/workflows/${activeItem.id}`, {
+      const res = await axios.put(`https://k-12-operational-command.onrender.com/api/workflows/${activeItem.id}`, {
         status: newStatus,
         notes: actionNotes || `Status updated to ${newStatus}`
       }, {
@@ -93,7 +93,7 @@ export default function LiveWorkflowQueues() {
       setActiveItem(res.data.item);
       loadWorkflows();
       // refresh history
-      const histRes = await axios.get(`http://localhost:4000/api/workflows/${activeItem.id}`, {
+      const histRes = await axios.get(`https://k-12-operational-command.onrender.com/api/workflows/${activeItem.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setItemHistory(histRes.data.history || []);
@@ -113,7 +113,7 @@ export default function LiveWorkflowQueues() {
     setUpdating(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.put(`http://localhost:4000/api/workflows/${activeItem.id}/escalate`, {
+      const res = await axios.put(`https://k-12-operational-command.onrender.com/api/workflows/${activeItem.id}/escalate`, {
         reason
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -121,7 +121,7 @@ export default function LiveWorkflowQueues() {
 
       setActiveItem(res.data.item);
       loadWorkflows();
-      const histRes = await axios.get(`http://localhost:4000/api/workflows/${activeItem.id}`, {
+      const histRes = await axios.get(`https://k-12-operational-command.onrender.com/api/workflows/${activeItem.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setItemHistory(histRes.data.history || []);
@@ -136,7 +136,7 @@ export default function LiveWorkflowQueues() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:4000/api/workflows", {
+      await axios.post("https://k-12-operational-command.onrender.com/api/workflows", {
         domain: newDomain,
         title: newTitle,
         description: newDescription,
