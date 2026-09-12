@@ -36,8 +36,8 @@ export default function TaskScenarioPlanning() {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [taskRes, timeRes] = await Promise.all([
-        axios.get("http://localhost:4000/api/tasks", { headers }),
-        axios.get("http://localhost:4000/api/tasks/timeline", { headers })
+        axios.get("https://k-12-operational-command.onrender.com/api/tasks", { headers }),
+        axios.get("https://k-12-operational-command.onrender.com/api/tasks/timeline", { headers })
       ]);
 
       setTasks(taskRes.data.tasks || []);
@@ -53,7 +53,7 @@ export default function TaskScenarioPlanning() {
     setSimulating(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post("http://localhost:4000/api/scenarios/simulate", {
+      const res = await axios.post("https://k-12-operational-command.onrender.com/api/scenarios/simulate", {
         scenarioName,
         enrolmentSurgePct: Number(enrolmentSurge),
         teacherAbsenteeismPct: Number(teacherAbsence),
@@ -77,7 +77,7 @@ export default function TaskScenarioPlanning() {
   const handleUpdateStatus = async (taskId, status) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:4000/api/tasks/${taskId}`, {
+      await axios.put(`https://k-12-operational-command.onrender.com/api/tasks/${taskId}`, {
         status,
         reason: `Status changed to ${status}`
       }, {
@@ -95,7 +95,7 @@ export default function TaskScenarioPlanning() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:4000/api/tasks/${taskId}/escalate`, { reason }, {
+      await axios.put(`https://k-12-operational-command.onrender.com/api/tasks/${taskId}/escalate`, { reason }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       loadTasksAndTimeline();
@@ -108,7 +108,7 @@ export default function TaskScenarioPlanning() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:4000/api/tasks", {
+      await axios.post("https://k-12-operational-command.onrender.com/api/tasks", {
         title: newTitle,
         domain: newDomain,
         priority: newPriority,
