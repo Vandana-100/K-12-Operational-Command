@@ -1,6 +1,11 @@
 const Database = require("better-sqlite3");
+const path = require("path");
 
-const db = new Database("k12_operations.db");
+const dbPath =
+  process.env.DB_PATH ||
+  path.join(__dirname, "..", "k12_operations.db");
+
+const db = new Database(dbPath);
 
 db.pragma("foreign_keys = ON");
 
