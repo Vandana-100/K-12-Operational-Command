@@ -20,12 +20,12 @@ export default function Dashboard() {
       const token = localStorage.getItem("token");
       const headers = { Authorization: `Bearer ${token}` };
       const url = targetCampus && targetCampus !== "All"
-        ? `http://localhost:4000/api/dashboard?campusId=${targetCampus}`
-        : "http://localhost:4000/api/dashboard";
+        ? `https://k-12-operational-command.onrender.com/api/dashboard?campusId=${targetCampus}`
+        : "https://k-12-operational-command.onrender.com/api/dashboard";
 
       const trendsUrl = targetCampus && targetCampus !== "All"
-        ? `http://localhost:4000/api/dashboard/trends?campusId=${targetCampus}`
-        : "http://localhost:4000/api/dashboard/trends";
+        ? `https://k-12-operational-command.onrender.com/api/dashboard/trends?campusId=${targetCampus}`
+        : "https://k-12-operational-command.onrender.com/api/dashboard/trends";
 
       const [dashRes, trendsRes] = await Promise.all([
         axios.get(url, { headers }),
