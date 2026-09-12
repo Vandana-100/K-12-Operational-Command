@@ -26,7 +26,7 @@ export default function AuditSettings() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let url = `http://localhost:4000/api/audit?action=${actionFilter}&entity=${entityFilter}`;
+      let url = `https://k-12-operational-command.onrender.com/api/audit?action=${actionFilter}&entity=${entityFilter}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
 
       const res = await axios.get(url, {
@@ -47,8 +47,8 @@ export default function AuditSettings() {
     try {
       const token = localStorage.getItem("token");
       const [campRes, aiRes] = await Promise.all([
-        axios.get("http://localhost:4000/api/settings/campuses", { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get("http://localhost:4000/api/settings/ai/status", { headers: { Authorization: `Bearer ${token}` } })
+        axios.get("https://k-12-operational-command.onrender.com/api/settings/campuses", { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get("https://k-12-operational-command.onrender.com/api/settings/ai/status", { headers: { Authorization: `Bearer ${token}` } })
       ]);
       setCampuses(campRes.data || []);
       setAiStatus(aiRes.data || null);
@@ -67,7 +67,7 @@ export default function AuditSettings() {
     setTestResult(null);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post("http://localhost:4000/api/settings/ai/test", {}, {
+      const res = await axios.post("https://k-12-operational-command.onrender.com/api/settings/ai/test", {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTestResult(res.data);

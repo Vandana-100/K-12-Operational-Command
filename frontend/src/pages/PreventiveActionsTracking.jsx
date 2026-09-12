@@ -30,8 +30,8 @@ export default function PreventiveActionsTracking() {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [actionRes, healthRes] = await Promise.all([
-        axios.get("http://localhost:4000/api/preventive-actions", { headers }),
-        axios.get("http://localhost:4000/api/preventive-actions/model-health", { headers })
+        axios.get("https://k-12-operational-command.onrender.com/api/preventive-actions", { headers }),
+        axios.get("https://k-12-operational-command.onrender.com/api/preventive-actions/model-health", { headers })
       ]);
 
       setActions(actionRes.data.actions || []);
@@ -54,7 +54,7 @@ export default function PreventiveActionsTracking() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post(`http://localhost:4000/api/preventive-actions/${actionId}/execute`, {}, {
+      const res = await axios.post(`https://k-12-operational-command.onrender.com/api/preventive-actions/${actionId}/execute`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(res.data.message);
@@ -74,7 +74,7 @@ export default function PreventiveActionsTracking() {
     setSubmittingDecision(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`http://localhost:4000/api/preventive-actions/${activeAction.id}/decision`, {
+      await axios.post(`https://k-12-operational-command.onrender.com/api/preventive-actions/${activeAction.id}/decision`, {
         decision: decisionType,
         reason: decisionReason
       }, {
@@ -95,7 +95,7 @@ export default function PreventiveActionsTracking() {
     setSubmittingFeedback(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`http://localhost:4000/api/preventive-actions/${feedbackAction.id}/feedback`, {
+      await axios.post(`https://k-12-operational-command.onrender.com/api/preventive-actions/${feedbackAction.id}/feedback`, {
         rating: Number(rating),
         feedback_text: feedbackText
       }, {

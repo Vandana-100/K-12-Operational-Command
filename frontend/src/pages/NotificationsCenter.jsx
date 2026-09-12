@@ -28,8 +28,8 @@ export default function NotificationsCenter() {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [notifRes, prefRes] = await Promise.all([
-        axios.get(`http://localhost:4000/api/notifications?filter=${filter}`, { headers }),
-        axios.get("http://localhost:4000/api/notifications/preferences", { headers })
+        axios.get(`https://k-12-operational-command.onrender.com/api/notifications?filter=${filter}`, { headers }),
+        axios.get("https://k-12-operational-command.onrender.com/api/notifications/preferences", { headers })
       ]);
 
       setNotifications(notifRes.data.notifications || []);
@@ -49,7 +49,7 @@ export default function NotificationsCenter() {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:4000/api/notifications/${id}/read`, {}, {
+      await axios.put(`https://k-12-operational-command.onrender.com/api/notifications/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.map(n => n.id === id ? { ...n, is_read: 1 } : n));
@@ -60,7 +60,7 @@ export default function NotificationsCenter() {
   const markAllRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:4000/api/notifications/read-all", {}, {
+      await axios.put("https://k-12-operational-command.onrender.com/api/notifications/read-all", {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.map(n => ({ ...n, is_read: 1 })));
@@ -71,7 +71,7 @@ export default function NotificationsCenter() {
   const dismissNotification = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:4000/api/notifications/${id}`, {
+      await axios.delete(`https://k-12-operational-command.onrender.com/api/notifications/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNotifications(prev => prev.filter(n => n.id !== id));
@@ -84,7 +84,7 @@ export default function NotificationsCenter() {
     setPrefsMessage("");
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:4000/api/notifications/preferences", preferences, {
+      await axios.put("https://k-12-operational-command.onrender.com/api/notifications/preferences", preferences, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setPrefsMessage("Alert dispatch preferences updated successfully!");

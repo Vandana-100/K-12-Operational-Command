@@ -17,11 +17,11 @@ export default function Navbar({ selectedCampus, onCampusChange, onMenuToggle })
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    axios.get("http://localhost:4000/api/settings/campuses", {
+    axios.get("https://k-12-operational-command.onrender.com/api/settings/campuses", {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setCampuses(res.data)).catch(() => {});
 
-    axios.get("http://localhost:4000/api/notifications?filter=Unread", {
+    axios.get("https://k-12-operational-command.onrender.com/api/notifications?filter=Unread", {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => {
       setNotifications(res.data.notifications?.slice(0, 5) || []);
@@ -46,7 +46,7 @@ export default function Navbar({ selectedCampus, onCampusChange, onMenuToggle })
   const markAllRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:4000/api/notifications/read-all", {}, {
+      await axios.put("https://k-12-operational-command.onrender.com/api/notifications/read-all", {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUnreadCount(0);

@@ -21,8 +21,8 @@ export default function ReportsAnalytics() {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [summaryRes, histRes] = await Promise.all([
-        axios.get("http://localhost:4000/api/reports/summary", { headers }),
-        axios.get("http://localhost:4000/api/reports/history", { headers })
+        axios.get("https://k-12-operational-command.onrender.com/api/reports/summary", { headers }),
+        axios.get("https://k-12-operational-command.onrender.com/api/reports/history", { headers })
       ]);
 
       setReportSummary(summaryRes.data);
@@ -42,7 +42,7 @@ export default function ReportsAnalytics() {
     setExporting(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get(`http://localhost:4000/api/reports/export/csv?reportType=${reportType}`, {
+      const response = await axios.get(`https://k-12-operational-command.onrender.com/api/reports/export/csv?reportType=${reportType}`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: "blob"
       });

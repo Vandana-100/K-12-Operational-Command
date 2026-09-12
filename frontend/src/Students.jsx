@@ -7,7 +7,7 @@ function Students() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/students")
+      .get("https://k-12-operational-command.onrender.com/api/students")
       .then((response) => {
         setStudents(response.data);
       })

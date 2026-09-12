@@ -27,7 +27,7 @@ export default function UserRoleManagement() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let url = "http://localhost:4000/api/users";
+      let url = "https://k-12-operational-command.onrender.com/api/users";
       if (selectedRole !== "All") url += `?role=${encodeURIComponent(selectedRole)}`;
       if (searchQuery) url += `${selectedRole !== "All" ? "&" : "?"}search=${encodeURIComponent(searchQuery)}`;
 
@@ -77,7 +77,7 @@ export default function UserRoleManagement() {
       const headers = { Authorization: `Bearer ${token}` };
 
       if (editingUser) {
-        await axios.put(`http://localhost:4000/api/users/${editingUser.id}`, {
+        await axios.put(`https://k-12-operational-command.onrender.com/api/users/${editingUser.id}`, {
           name: formName,
           role: formRole,
           campus_id: formCampus ? Number(formCampus) : null,
@@ -85,7 +85,7 @@ export default function UserRoleManagement() {
           password: formPassword || undefined
         }, { headers });
       } else {
-        await axios.post("http://localhost:4000/api/users", {
+        await axios.post("https://k-12-operational-command.onrender.com/api/users", {
           name: formName,
           email: formEmail,
           password: formPassword || "admin123",
@@ -112,7 +112,7 @@ export default function UserRoleManagement() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:4000/api/users/${u.id}/status`, { status: nextStatus }, {
+      await axios.put(`https://k-12-operational-command.onrender.com/api/users/${u.id}/status`, { status: nextStatus }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       loadUsers();
