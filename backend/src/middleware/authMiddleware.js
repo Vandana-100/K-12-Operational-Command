@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_SECRET || "k12-secret-key";
+const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
 function authenticateToken(req, res, next) {
   try {
@@ -20,7 +20,7 @@ function authenticateToken(req, res, next) {
       });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {

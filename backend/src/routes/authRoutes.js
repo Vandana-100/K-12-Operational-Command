@@ -76,7 +76,7 @@ router.post("/login", (req, res) => {
       department: user.department
     };
 
-    const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: "8h" });
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: "8h" });
 
     logAudit({
       userId: user.id,
