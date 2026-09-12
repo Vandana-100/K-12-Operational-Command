@@ -37,7 +37,7 @@ export default function Login() {
     setErrorMessage("");
     setSuccessMessage("");
     try {
-      const response = await axios.post("http://localhost:4000/api/auth/login", {
+      const response = await axios.post("https://k-12-operational-command.onrender.com/api/auth/login", {
         email: loginEmail,
         password: loginPass,
       });
@@ -68,7 +68,7 @@ export default function Login() {
     e.preventDefault();
     if (!forgotEmail) return;
     try {
-      await axios.post("http://localhost:4000/api/auth/forgot-password", { email: forgotEmail });
+      await axios.post("https://k-12-operational-command.onrender.com/api/auth/forgot-password", { email: forgotEmail });
       setForgotStatus("Reset link sent. Check your inbox.");
       setTimeout(() => { setIsForgotModalOpen(false); setForgotStatus(""); }, 2500);
     } catch {
