@@ -22,8 +22,8 @@ export default function ForecastCapacityAnalysis() {
       const headers = { Authorization: `Bearer ${token}` };
 
       const [forecastRes, threshRes] = await Promise.all([
-        axios.get("http://localhost:4000/api/predictions/forecast-series", { headers }),
-        axios.get("http://localhost:4000/api/settings/thresholds", { headers })
+        axios.get("https://k-12-operational-command.onrender.com/api/predictions/forecast-series", { headers }),
+        axios.get("https://k-12-operational-command.onrender.com/api/settings/thresholds", { headers })
       ]);
 
       setForecastData(forecastRes.data.series || []);
@@ -66,7 +66,7 @@ export default function ForecastCapacityAnalysis() {
     setSaveMessage("");
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:4000/api/settings/thresholds/${th.key}`, {
+      await axios.put(`https://k-12-operational-command.onrender.com/api/settings/thresholds/${th.key}`, {
         warning_value: th.warning_value,
         critical_value: th.critical_value
       }, {
